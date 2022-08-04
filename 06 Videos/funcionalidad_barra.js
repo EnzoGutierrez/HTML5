@@ -9,7 +9,7 @@ function Comenzar(){
     progreso = document.getElementById("progreso");
 
     reproducir.addEventListener("click", clicando, false);
-    progreso.addEventListener("click", adelantando, false);
+    barra.addEventListener("click", adelantando, false);
 }
 
 function clicando(){
@@ -33,6 +33,15 @@ function estado(){
         var total = parseInt(mivideo.currentTime*maximo/mivideo.duration);
 
         progreso.style.width = total+"px";
+    }
+}
+
+function adelantando(posicion){
+    if ((mivideo.paused ==false) && (mivideo.ended == false)){
+        var ratonX = posicion.pageX-barra.offsetLeft;
+        var nuevoTiempo = ratonX*mivideo.duration/maximo;
+        mivideo.currentTime = nuevoTiempo;
+        progreso.style.width = ratonX+"px";
     }
 }
 
